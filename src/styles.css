@@ -74,24 +74,20 @@ button { cursor: pointer; }
   background: transparent;
   text-align: left;
   text-transform: uppercase;
-}
-
-.nav-link span {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  width: max-content;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: .045em;
-  transform-origin: left center;
-  transition: text-shadow .28s ease, filter .28s ease;
+  min-height: 34px;
 }
 
 .nav-link span {
   display: inline-block;
+  width: max-content;
   min-width: 88px;
+  height: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: .045em;
   transform-origin: left center;
+  transition: text-shadow .28s ease, filter .28s ease, transform .28s ease;
 }
 
 .nav-link { position: relative; }
@@ -117,19 +113,19 @@ button { cursor: pointer; }
   animation: star-pop 1.25s ease-in-out infinite alternate;
 }
 
-.nav-link:hover:not(.is-paused) span,
-.nav-link.is-glitching span {
-  transform: translateX(1px);
+.nav-link:hover:not(.active):not(.is-paused) span,
+.nav-link.is-glitching:not(.active) span {
+  transform: scale(1.045);
   text-shadow:
     -.8px 0 rgba(0, 245, 255, .82),
     .8px 0 rgba(255, 53, 209, .82),
     0 0 12px rgba(255, 255, 255, .7);
-  animation: nav-static-glitch .95s steps(2, end) infinite;
+  animation: nav-static-glitch .86s steps(2, end) infinite;
 }
 
-.nav-link.is-paused span {
+.nav-link.is-paused:not(.active) span {
   transform: none;
-  text-shadow: 0 0 10px rgba(255, 255, 255, .78);
+  text-shadow: 0 0 9px rgba(255, 255, 255, .68);
   animation: none;
 }
 
@@ -143,6 +139,7 @@ button { cursor: pointer; }
   color: rgba(255, 255, 255, .76);
   font-size: 13px;
   font-weight: 400;
+  line-height: 13px;
 }
 
 

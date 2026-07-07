@@ -193,15 +193,15 @@ function startNavGlitch(button) {
     button.classList.add('is-glitching');
     button.classList.remove('is-paused');
     glitchNavButton(button);
-    activeNavGlitchTimer = window.setInterval(() => glitchNavButton(button), 86);
+    activeNavGlitchTimer = window.setInterval(() => glitchNavButton(button), 44);
 
     activeNavPauseTimer = window.setTimeout(() => {
       window.clearInterval(activeNavGlitchTimer);
       restoreNavButton(button);
       button.classList.remove('is-glitching');
       button.classList.add('is-paused');
-      activeNavPauseTimer = window.setTimeout(runBurst, 720);
-    }, 520);
+      activeNavPauseTimer = window.setTimeout(runBurst, 560);
+    }, 760);
   };
 
   window.clearInterval(activeNavGlitchTimer);
@@ -221,7 +221,7 @@ function stopNavGlitch(button) {
 
 nav.addEventListener('mouseover', (event) => {
   const button = event.target.closest('.nav-link');
-  if (!button || activeNavGlitchButton === button) return;
+  if (!button || button.classList.contains('active') || activeNavGlitchButton === button) return;
   startNavGlitch(button);
 });
 
