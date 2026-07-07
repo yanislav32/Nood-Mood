@@ -62,7 +62,7 @@ button { cursor: pointer; }
   width: min(100%, 154px);
   display: grid;
   gap: clamp(18px, 3.1vh, 28px);
-  transform: translate(14px, -10vh);
+  transform: translate(14px, -12vh);
 }
 
 .nav-link {
@@ -408,7 +408,7 @@ h1 {
     padding: 22px 14px 18px;
   }
 
-  .main-nav { width: min(100%, 138px); transform: translate(10px, -7vh); }
+  .main-nav { width: min(100%, 138px); transform: translate(10px, -9vh); }
   .rail-logo { font-size: clamp(38px, 4vw, 52px); }
 
   .nav-link span { font-size: 13px; }
