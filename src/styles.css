@@ -24,6 +24,8 @@
   --line: #0b0b0b;
   --thin: 1px;
   --gap: clamp(8px, 1.05vw, 14px);
+  --rail-pad-top: clamp(24px, 4.5vh, 42px);
+  --content-top-offset: clamp(92px, 15vh, 146px);
   font-family: var(--font-body);
   color: var(--black);
   background: var(--white);
@@ -50,19 +52,20 @@ button { cursor: pointer; }
   display: grid;
   grid-template-rows: 1fr auto;
   gap: clamp(18px, 3vh, 28px);
-  padding: clamp(24px, 4.5vh, 42px) clamp(18px, 1.7vw, 24px) clamp(20px, 3vh, 28px);
+  padding: var(--rail-pad-top) clamp(18px, 1.7vw, 24px) clamp(20px, 3vh, 28px);
   border-right: 0;
   background: var(--orange);
   color: var(--white);
 }
 
 .main-nav {
-  align-self: center;
+  align-self: start;
   justify-self: center;
   width: min(100%, 154px);
   display: grid;
   gap: clamp(18px, 3.1vh, 28px);
-  transform: translateY(-13.5vh);
+  margin-top: calc(var(--content-top-offset) - var(--rail-pad-top));
+  transform: none;
 }
 
 .nav-link {
@@ -430,7 +433,7 @@ button { cursor: pointer; }
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: clamp(82px, 13.5vh, 132px);
+  padding-top: calc(var(--content-top-offset) - var(--gap));
   padding-left: clamp(28px, 2.5vw, 42px);
   opacity: 0;
   transform: translateY(8px);
@@ -664,7 +667,11 @@ h1 {
 }
 
 @media (max-width: 1280px), (max-height: 820px) {
-  :root { --gap: 10px; }
+  :root {
+    --gap: 10px;
+    --rail-pad-top: 22px;
+    --content-top-offset: clamp(80px, 13vh, 118px);
+  }
 
   .site-shell {
     grid-template-columns: clamp(168px, 12.8vw, 186px) minmax(0, 1fr);
@@ -674,7 +681,7 @@ h1 {
     padding: 22px 14px 18px;
   }
 
-  .main-nav { width: min(100%, 138px); transform: translateY(-10vh); }
+  .main-nav { width: min(100%, 138px); }
   .rail-bottom { width: min(100%, 138px); gap: 10px; }
   .rail-logo { font-size: clamp(38px, 4vw, 52px); }
 
@@ -698,7 +705,7 @@ h1 {
   }
 
   .hero-copy {
-    padding-top: clamp(70px, 12vh, 104px);
+    padding-top: calc(var(--content-top-offset) - var(--gap));
     padding-left: 28px;
   }
 
