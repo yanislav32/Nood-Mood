@@ -46,51 +46,6 @@ const heroCopy = document.querySelector('.hero-copy');
 
 const root = document.documentElement;
 
-function syncHeroLayoutToMenu() {
-  const hero = document.querySelector('.hero');
-  const cta = document.querySelector('.primary-cta');
-  const firstMenuLabel = nav?.querySelector('[data-id="home"] span');
-  const philosophySubtitle = nav?.querySelector('[data-id="philosophy"] small');
-  const contactsSubtitle = nav?.querySelector('[data-id="contacts"] small');
-
-  if (!hero || !cta || !firstMenuLabel || !philosophySubtitle || !contactsSubtitle || window.matchMedia('(max-width: 900px)').matches) {
-    root.style.removeProperty('--hero-height');
-    root.style.removeProperty('--hero-copy-top');
-    root.style.removeProperty('--hero-headline-size');
-    root.style.removeProperty('--hero-cta-margin');
-    return;
-  }
-
-  const heroRect = hero.getBoundingClientRect();
-  const topOffset = Math.max(0, firstMenuLabel.getBoundingClientRect().top - heroRect.top);
-  const headlineTargetBottom = philosophySubtitle.getBoundingClientRect().bottom - heroRect.top;
-  const ctaTargetBottom = contactsSubtitle.getBoundingClientRect().bottom - heroRect.top;
-  const headlineTargetHeight = Math.max(120, headlineTargetBottom - topOffset);
-  const heroHeight = Math.round(ctaTargetBottom + topOffset);
-
-  root.style.setProperty('--hero-height', `${heroHeight}px`);
-  root.style.setProperty('--hero-copy-top', `${Math.round(topOffset)}px`);
-  root.style.removeProperty('--hero-headline-size');
-  root.style.setProperty('--hero-cta-margin', '16px');
-
-  window.requestAnimationFrame(() => {
-    const headline = fields.headline;
-    const headlineHeight = headline.getBoundingClientRect().height || 1;
-    const currentSize = Number.parseFloat(window.getComputedStyle(headline).fontSize);
-    const nextSize = Math.max(34, Math.min(96, currentSize * (headlineTargetHeight / headlineHeight)));
-
-    root.style.setProperty('--hero-headline-size', `${nextSize.toFixed(2)}px`);
-
-    window.requestAnimationFrame(() => {
-      const currentMargin = Number.parseFloat(window.getComputedStyle(cta).marginTop);
-      const currentBottom = cta.getBoundingClientRect().bottom - hero.getBoundingClientRect().top;
-      const nextMargin = Math.max(10, currentMargin + (ctaTargetBottom - currentBottom));
-
-      root.style.setProperty('--hero-cta-margin', `${Math.round(nextMargin)}px`);
-    });
-  });
-}
-
 const fields = {
   eyebrow: document.querySelector('[data-field="eyebrow"]'),
   headline: document.querySelector('[data-field="headline"]'),
@@ -119,7 +74,6 @@ function setActive(id) {
     fields.text.textContent = current.text;
     heroCopy.classList.add('is-visible');
     renderNav();
-    window.requestAnimationFrame(syncHeroLayoutToMenu);
   }, 90);
 }
 
@@ -285,6 +239,4 @@ document.querySelectorAll('[data-market-button]').forEach((button) => {
   button.addEventListener('blur', () => stopMarketGlitch(button));
 });
 
-window.addEventListener('resize', syncHeroLayoutToMenu);
 setActive(activeId);
-window.requestAnimationFrame(syncHeroLayoutToMenu);
