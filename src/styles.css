@@ -434,8 +434,9 @@ button { cursor: pointer; }
 .hero-copy {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
+  padding-top: var(--hero-copy-top, 0);
   padding-left: clamp(28px, 2.5vw, 42px);
   opacity: 0;
   transform: translateY(8px);
@@ -448,7 +449,7 @@ h1 {
   max-width: 820px;
   margin: 0;
   font-family: var(--font-brand);
-  font-size: clamp(38px, 5.15vw, 84px);
+  font-size: var(--hero-headline-size, clamp(38px, 5.15vw, 84px));
   line-height: .94;
   font-weight: 700;
   letter-spacing: -.042em;
@@ -475,7 +476,7 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: clamp(16px, 3.5vh, 30px);
+  margin-top: var(--hero-cta-margin, clamp(16px, 3.5vh, 30px));
   padding: 0 18px;
   border: var(--thin) solid rgba(255, 255, 255, .7);
   background: transparent;
