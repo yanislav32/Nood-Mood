@@ -43,6 +43,24 @@ const menuItems = [
 
 const nav = document.querySelector('.main-nav');
 const heroCopy = document.querySelector('.hero-copy');
+
+const root = document.documentElement;
+const siteShell = document.querySelector('.site-shell');
+
+function syncHeroHeightToMenu() {
+  if (!nav || !siteShell || window.matchMedia('(max-width: 900px)').matches) {
+    root.style.removeProperty('--hero-height');
+    return;
+  }
+
+  const navRect = nav.getBoundingClientRect();
+  const shellRect = siteShell.getBoundingClientRect();
+  const topOffset = Math.max(0, navRect.top - shellRect.top);
+  const symmetricHeight = Math.round((topOffset * 2) + navRect.height);
+
+  root.style.setProperty('--hero-height', `${symmetricHeight}px`);
+}
+
 const fields = {
   eyebrow: document.querySelector('[data-field="eyebrow"]'),
   headline: document.querySelector('[data-field="headline"]'),
@@ -71,6 +89,7 @@ function setActive(id) {
     fields.text.textContent = current.text;
     heroCopy.classList.add('is-visible');
     renderNav();
+    window.requestAnimationFrame(syncHeroHeightToMenu);
   }, 90);
 }
 
@@ -236,4 +255,6 @@ document.querySelectorAll('[data-market-button]').forEach((button) => {
   button.addEventListener('blur', () => stopMarketGlitch(button));
 });
 
+window.addEventListener('resize', syncHeroHeightToMenu);
 setActive(activeId);
+window.requestAnimationFrame(syncHeroHeightToMenu);
