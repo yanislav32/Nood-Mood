@@ -40,7 +40,7 @@ button { cursor: pointer; }
   width: 100vw;
   height: 100dvh;
   display: grid;
-  grid-template-columns: clamp(190px, 14vw, 230px) minmax(0, 1fr);
+  grid-template-columns: clamp(180px, 12.8vw, 210px) minmax(0, 1fr);
   overflow: hidden;
   background: var(--white);
 }
@@ -62,7 +62,7 @@ button { cursor: pointer; }
   width: min(100%, 154px);
   display: grid;
   gap: clamp(18px, 3.1vh, 28px);
-  transform: translate(14px, -12vh);
+  transform: translateY(-13.5vh);
 }
 
 .nav-link {
@@ -77,7 +77,6 @@ button { cursor: pointer; }
 }
 
 .nav-link span {
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -89,17 +88,27 @@ button { cursor: pointer; }
   transition: transform .28s cubic-bezier(.2, .9, .2, 1), text-shadow .28s ease, filter .28s ease;
 }
 
-.nav-link span::before {
+.nav-link { position: relative; }
+
+.nav-link::after {
   content: '';
+  position: absolute;
+  top: 2px;
+  right: 0;
   width: 12px;
   aspect-ratio: 1;
-  position: absolute;
-  left: -18px;
   background: #fff;
   clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 61%, 50% 100%, 40% 61%, 0 50%, 40% 39%);
   opacity: 0;
-  transform: scale(.68) rotate(-26deg);
+  transform: scale(.7) rotate(-22deg);
   transition: opacity .22s ease, transform .32s cubic-bezier(.2, .9, .2, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  animation: star-pop 1.25s ease-in-out infinite alternate;
 }
 
 .nav-link:hover span,
@@ -110,13 +119,6 @@ button { cursor: pointer; }
     .8px 0 rgba(255, 53, 209, .82),
     0 0 12px rgba(255, 255, 255, .7);
   animation: nav-aurora 1.65s ease-in-out infinite alternate;
-}
-
-.nav-link:hover span::before,
-.nav-link.active span::before {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-  animation: star-pop 1.25s ease-in-out infinite alternate;
 }
 
 .nav-link small {
@@ -150,6 +152,8 @@ button { cursor: pointer; }
 }
 
 .rail-bottom {
+  justify-self: center;
+  width: min(100%, 154px);
   display: grid;
   gap: clamp(18px, 2.6vh, 26px);
 }
@@ -162,10 +166,8 @@ button { cursor: pointer; }
   font-size: clamp(42px, 4.2vw, 62px);
   font-weight: 700;
   line-height: .86;
-  letter-spacing: -.068em;
+  letter-spacing: -.062em;
   text-transform: uppercase;
-  transform: scaleX(1.08);
-  transform-origin: left center;
 }
 
 .market-links {
@@ -401,14 +403,15 @@ h1 {
   :root { --gap: 10px; }
 
   .site-shell {
-    grid-template-columns: clamp(176px, 13.5vw, 198px) minmax(0, 1fr);
+    grid-template-columns: clamp(168px, 12.8vw, 186px) minmax(0, 1fr);
   }
 
   .side-rail {
     padding: 22px 14px 18px;
   }
 
-  .main-nav { width: min(100%, 138px); transform: translate(10px, -9vh); }
+  .main-nav { width: min(100%, 138px); transform: translateY(-10vh); }
+  .rail-bottom { width: min(100%, 138px); }
   .rail-logo { font-size: clamp(38px, 4vw, 52px); }
 
   .nav-link span { font-size: 13px; }
@@ -497,7 +500,7 @@ h1 {
   .nav-link { min-width: max-content; }
   .nav-link small { display: none; }
 
-  .rail-bottom { gap: 10px; }
+  .rail-bottom { width: 100%; gap: 10px; }
   .rail-logo { display: none; }
   .market-links { display: flex; overflow-x: auto; padding-top: 0; }
   .market-links a { min-width: max-content; }
