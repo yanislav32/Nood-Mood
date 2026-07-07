@@ -85,7 +85,13 @@ button { cursor: pointer; }
   font-weight: 400;
   letter-spacing: .045em;
   transform-origin: left center;
-  transition: transform .28s cubic-bezier(.2, .9, .2, 1), text-shadow .28s ease, filter .28s ease;
+  transition: text-shadow .28s ease, filter .28s ease;
+}
+
+.nav-link span {
+  display: inline-block;
+  min-width: 88px;
+  transform-origin: left center;
 }
 
 .nav-link { position: relative; }
@@ -111,14 +117,20 @@ button { cursor: pointer; }
   animation: star-pop 1.25s ease-in-out infinite alternate;
 }
 
-.nav-link:hover span,
+.nav-link:hover:not(.is-paused) span,
 .nav-link.is-glitching span {
-  transform: scale(1.045);
+  transform: translateX(1px);
   text-shadow:
     -.8px 0 rgba(0, 245, 255, .82),
     .8px 0 rgba(255, 53, 209, .82),
     0 0 12px rgba(255, 255, 255, .7);
   animation: nav-static-glitch .95s steps(2, end) infinite;
+}
+
+.nav-link.is-paused span {
+  transform: none;
+  text-shadow: 0 0 10px rgba(255, 255, 255, .78);
+  animation: none;
 }
 
 .nav-link.active span {

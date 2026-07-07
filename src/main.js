@@ -88,6 +88,7 @@ const glitchGlyphs = ['ヌ', 'オ', 'ム', 'メ', 'ラ', 'ン', 'リ', 'Ø', '�
 const marketTimers = new WeakMap();
 let activeNavGlitchButton = null;
 let activeNavGlitchTimer = 0;
+let activeNavPauseTimer = 0;
 
 function randomGlyphLine(length) {
   return Array.from({ length }, () => glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)]).join('');
@@ -184,18 +185,37 @@ function startNavGlitch(button) {
     stopNavGlitch(activeNavGlitchButton);
   }
 
-  window.clearInterval(activeNavGlitchTimer);
   activeNavGlitchButton = button;
-  button.classList.add('is-glitching');
-  glitchNavButton(button);
-  activeNavGlitchTimer = window.setInterval(() => glitchNavButton(button), 75);
+
+  const runBurst = () => {
+    if (activeNavGlitchButton !== button || button.classList.contains('active')) return;
+
+    button.classList.add('is-glitching');
+    button.classList.remove('is-paused');
+    glitchNavButton(button);
+    activeNavGlitchTimer = window.setInterval(() => glitchNavButton(button), 86);
+
+    activeNavPauseTimer = window.setTimeout(() => {
+      window.clearInterval(activeNavGlitchTimer);
+      restoreNavButton(button);
+      button.classList.remove('is-glitching');
+      button.classList.add('is-paused');
+      activeNavPauseTimer = window.setTimeout(runBurst, 720);
+    }, 520);
+  };
+
+  window.clearInterval(activeNavGlitchTimer);
+  window.clearTimeout(activeNavPauseTimer);
+  runBurst();
 }
 
 function stopNavGlitch(button) {
   window.clearInterval(activeNavGlitchTimer);
+  window.clearTimeout(activeNavPauseTimer);
   activeNavGlitchTimer = 0;
+  activeNavPauseTimer = 0;
   activeNavGlitchButton = null;
-  button.classList.remove('is-glitching');
+  button.classList.remove('is-glitching', 'is-paused');
   restoreNavButton(button);
 }
 
