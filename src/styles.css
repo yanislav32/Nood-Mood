@@ -111,13 +111,14 @@ button { cursor: pointer; }
   animation: star-pop 1.25s ease-in-out infinite alternate;
 }
 
-.nav-link:hover span {
+.nav-link:hover span,
+.nav-link.is-glitching span {
   transform: scale(1.045);
   text-shadow:
     -.8px 0 rgba(0, 245, 255, .82),
     .8px 0 rgba(255, 53, 209, .82),
     0 0 12px rgba(255, 255, 255, .7);
-  animation: nav-static-glitch .72s steps(2, end) infinite;
+  animation: nav-static-glitch .95s steps(2, end) infinite;
 }
 
 .nav-link.active span {
@@ -273,7 +274,7 @@ button { cursor: pointer; }
     -1px 0 rgba(0, 245, 255, .82),
     1px 0 rgba(255, 53, 209, .76),
     0 0 10px rgba(255,255,255,.5);
-  animation: button-cyber-jitter .34s steps(2, end) infinite;
+  animation: button-cyber-jitter .55s steps(2, end) infinite;
 }
 
 .market-links a:hover.is-paused {
@@ -294,7 +295,7 @@ button { cursor: pointer; }
 .market-links a.is-glitching::before,
 .market-links a:hover:not(.is-paused)::before {
   opacity: 1;
-  animation: button-binary-fill .74s steps(12, end) infinite;
+  animation: button-binary-fill 1.28s steps(12, end) infinite;
 }
 
 .market-links a.is-glitching::after,

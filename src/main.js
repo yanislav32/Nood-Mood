@@ -53,7 +53,7 @@ let activeId = 'home';
 function renderNav() {
   nav.innerHTML = menuItems.map((item) => `
     <button class="nav-link${item.id === activeId ? ' active' : ''}" type="button" data-id="${item.id}">
-      <span>${item.title}</span>
+      <span data-title="${item.title}">${item.title}</span>
       <small>${item.subtitle}</small>
     </button>
   `).join('');
@@ -65,6 +65,7 @@ function setActive(id) {
   heroCopy.classList.remove('is-visible');
 
   window.setTimeout(() => {
+    if (activeNavGlitchButton) stopNavGlitch(activeNavGlitchButton);
     fields.eyebrow.textContent = current.eyebrow;
     fields.headline.textContent = current.headline;
     fields.text.textContent = current.text;
@@ -85,6 +86,8 @@ document.querySelectorAll('[data-open]').forEach((card) => {
 
 const glitchGlyphs = ['ヌ', 'オ', 'ム', 'メ', 'ラ', 'ン', 'リ', 'Ø', '零', '麺', 'ノ', 'ド'];
 const marketTimers = new WeakMap();
+let activeNavGlitchButton = null;
+let activeNavGlitchTimer = 0;
 
 function randomGlyphLine(length) {
   return Array.from({ length }, () => glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)]).join('');
@@ -129,16 +132,16 @@ function startMarketGlitch(button) {
     button.classList.remove('is-paused');
     glitchMarketButton(button);
 
-    const interval = window.setInterval(() => glitchMarketButton(button), 38);
+    const interval = window.setInterval(() => glitchMarketButton(button), 55);
     const timeout = window.setTimeout(() => {
       window.clearInterval(interval);
       restoreMarketButton(button);
       button.classList.remove('is-glitching');
       button.classList.add('is-paused');
 
-      const pauseTimeout = window.setTimeout(runBurst, 320);
+      const pauseTimeout = window.setTimeout(runBurst, 620);
       marketTimers.set(button, { interval: 0, timeout: pauseTimeout });
-    }, 420);
+    }, 720);
 
     marketTimers.set(button, { interval, timeout });
   };
@@ -152,6 +155,61 @@ function stopMarketGlitch(button) {
   button.classList.remove('is-glitching', 'is-paused');
   restoreMarketButton(button);
 }
+
+function randomizeWordParts(word) {
+  return Array.from(word).map((letter) => {
+    if (letter === ' ' || Math.random() > 0.34) return letter;
+    return glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)];
+  }).join('');
+}
+
+function restoreNavButton(button) {
+  const label = button.querySelector('[data-title]');
+  if (!label) return;
+
+  label.textContent = label.dataset.title;
+}
+
+function glitchNavButton(button) {
+  const label = button.querySelector('[data-title]');
+  if (!label) return;
+
+  label.textContent = randomizeWordParts(label.dataset.title);
+}
+
+function startNavGlitch(button) {
+  if (button.classList.contains('active')) return;
+
+  if (activeNavGlitchButton && activeNavGlitchButton !== button) {
+    stopNavGlitch(activeNavGlitchButton);
+  }
+
+  window.clearInterval(activeNavGlitchTimer);
+  activeNavGlitchButton = button;
+  button.classList.add('is-glitching');
+  glitchNavButton(button);
+  activeNavGlitchTimer = window.setInterval(() => glitchNavButton(button), 75);
+}
+
+function stopNavGlitch(button) {
+  window.clearInterval(activeNavGlitchTimer);
+  activeNavGlitchTimer = 0;
+  activeNavGlitchButton = null;
+  button.classList.remove('is-glitching');
+  restoreNavButton(button);
+}
+
+nav.addEventListener('mouseover', (event) => {
+  const button = event.target.closest('.nav-link');
+  if (!button || activeNavGlitchButton === button) return;
+  startNavGlitch(button);
+});
+
+nav.addEventListener('mouseout', (event) => {
+  const button = event.target.closest('.nav-link');
+  if (!button || button.contains(event.relatedTarget)) return;
+  stopNavGlitch(button);
+});
 
 document.querySelectorAll('[data-market-button]').forEach((button) => {
   button.addEventListener('mouseenter', () => startMarketGlitch(button));
