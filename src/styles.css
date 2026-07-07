@@ -223,13 +223,14 @@ button { cursor: pointer; }
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(100deg, rgba(255,255,255,.96) 0%, rgba(245,255,252,.96) 52%, rgba(215,255,248,.9) 100%),
-    repeating-linear-gradient(90deg, rgba(255,97,0,.2) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(0deg, transparent 0 8px, rgba(0,0,0,.08) 8px 9px);
+    linear-gradient(90deg, #fff 0 50%, #050505 50% 100%),
+    repeating-linear-gradient(90deg, transparent 0 5px, rgba(0,245,255,.25) 5px 6px),
+    repeating-linear-gradient(0deg, transparent 0 6px, rgba(255,53,209,.22) 6px 7px);
+  background-size: 200% 100%, 10px 100%, 100% 9px;
   opacity: 0;
-  transform: scaleX(0);
+  transform: scaleX(1);
   transform-origin: left center;
-  transition: transform .22s cubic-bezier(.2, .9, .2, 1), opacity .18s ease;
+  transition: opacity .08s steps(2, end);
 }
 
 .market-links a::after {
@@ -238,36 +239,36 @@ button { cursor: pointer; }
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(115deg, transparent 0 28%, rgba(0,245,255,.55) 42%, rgba(255,53,209,.45) 51%, transparent 66%),
-    repeating-linear-gradient(90deg, transparent 0 3px, rgba(0,0,0,.16) 3px 4px);
-  mix-blend-mode: multiply;
+    repeating-linear-gradient(90deg, transparent 0 2px, rgba(0,0,0,.45) 2px 3px, transparent 3px 7px),
+    repeating-linear-gradient(0deg, rgba(0,245,255,.22) 0 1px, transparent 1px 5px, rgba(255,53,209,.2) 5px 6px, transparent 6px 10px);
+  mix-blend-mode: difference;
   opacity: 0;
-  transform: translateX(-120%);
+  transform: translate3d(0, 0, 0);
 }
 
 .market-links a:hover {
   color: var(--orange);
-  border-color: rgba(255, 255, 255, .95);
+  border-color: rgba(255, 255, 255, .98);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .55),
-    inset 0 0 18px rgba(0, 245, 255, .18),
-    0 0 16px rgba(0, 245, 255, .18),
-    0 0 28px rgba(255, 53, 209, .14);
+    inset 0 0 0 1px rgba(255, 255, 255, .7),
+    inset 0 0 22px rgba(0, 0, 0, .28),
+    0 0 18px rgba(0, 245, 255, .24),
+    0 0 32px rgba(255, 53, 209, .18);
   text-shadow:
-    -1px 0 rgba(0, 245, 255, .7),
-    1px 0 rgba(255, 53, 209, .64),
-    0 0 10px rgba(255,255,255,.44);
-  animation: button-cyber-jitter .62s steps(2, end) infinite;
+    -1px 0 rgba(0, 245, 255, .82),
+    1px 0 rgba(255, 53, 209, .76),
+    0 0 10px rgba(255,255,255,.5);
+  animation: button-cyber-jitter .34s steps(2, end) infinite;
 }
 
 .market-links a:hover::before {
   opacity: 1;
-  transform: scaleX(1);
+  animation: button-binary-fill .34s steps(12, end) infinite;
 }
 
 .market-links a:hover::after {
-  opacity: .9;
-  animation: y2k-sweep .92s cubic-bezier(.2, .9, .2, 1) infinite;
+  opacity: .86;
+  animation: glitch-noise .18s steps(4, end) infinite;
 }
 
 .market-links i {
@@ -283,15 +284,30 @@ button { cursor: pointer; }
   animation: glyph-reverb .7s ease-in-out infinite alternate;
 }
 
-@keyframes y2k-sweep {
-  0% { transform: translateX(-125%) skewX(-12deg); }
-  58%, 100% { transform: translateX(125%) skewX(-12deg); }
+@keyframes button-binary-fill {
+  0%, 100% { background-position: 0 0, 0 0, 0 0; filter: invert(0); }
+  8% { background-position: 100% 0, 2px 0, 0 1px; filter: invert(1); }
+  17% { background-position: 0 0, -3px 0, 0 -1px; filter: invert(0); }
+  25% { background-position: 100% 0, 5px 0, 0 2px; filter: invert(1); }
+  34% { background-position: 0 0, -1px 0, 0 -2px; filter: invert(0); }
+  42% { background-position: 100% 0, 3px 0, 0 3px; filter: invert(1); }
+  51% { background-position: 0 0, -4px 0, 0 0; filter: invert(0); }
+  60% { background-position: 100% 0, 1px 0, 0 -3px; filter: invert(1); }
+  72% { background-position: 0 0, 6px 0, 0 1px; filter: invert(0); }
+}
+
+@keyframes glitch-noise {
+  0% { transform: translate3d(-2px, 0, 0); opacity: .75; }
+  35% { transform: translate3d(2px, -1px, 0); opacity: .95; }
+  70% { transform: translate3d(-1px, 1px, 0); opacity: .82; }
+  100% { transform: translate3d(1px, 0, 0); opacity: .9; }
 }
 
 @keyframes button-cyber-jitter {
-  0%, 100% { filter: none; }
-  33% { filter: contrast(1.28) saturate(1.55); }
-  55% { filter: hue-rotate(-10deg) brightness(1.05); }
+  0%, 100% { filter: none; transform: translateX(0); }
+  20% { filter: contrast(1.5) saturate(1.8); transform: translateX(-1px); }
+  40% { filter: invert(1) contrast(1.2); transform: translateX(1px); }
+  60% { filter: contrast(1.35) brightness(1.08); transform: translateX(0); }
 }
 
 @keyframes glyph-reverb {

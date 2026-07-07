@@ -82,4 +82,48 @@ document.querySelectorAll('[data-open]').forEach((card) => {
   card.addEventListener('click', () => setActive(card.dataset.open));
 });
 
+
+const glitchGlyphs = ['ヌ', 'オ', 'ム', 'メ', 'ラ', 'ン', 'リ', 'Ø', '零', '麺', 'ノ', 'ド'];
+const marketTimers = new WeakMap();
+
+function randomGlyphLine(length) {
+  return Array.from({ length }, () => glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)]).join('');
+}
+
+function restoreMarketButton(button) {
+  const span = button.querySelector('span');
+  const icon = button.querySelector('i');
+  if (!span || !icon) return;
+
+  span.innerHTML = `${span.dataset.top}<br>${span.dataset.bottom}`;
+  icon.textContent = icon.dataset.glyph;
+}
+
+function glitchMarketButton(button) {
+  const span = button.querySelector('span');
+  const icon = button.querySelector('i');
+  if (!span || !icon) return;
+
+  const topLength = span.dataset.top.length;
+  const bottomLength = span.dataset.bottom.length;
+  span.innerHTML = `${randomGlyphLine(topLength)}<br>${randomGlyphLine(bottomLength)}`;
+  icon.textContent = glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)];
+}
+
+document.querySelectorAll('[data-market-button]').forEach((button) => {
+  button.addEventListener('mouseenter', () => {
+    window.clearInterval(marketTimers.get(button));
+    glitchMarketButton(button);
+    marketTimers.set(button, window.setInterval(() => glitchMarketButton(button), 38));
+  });
+
+  button.addEventListener('mouseleave', () => {
+    window.clearInterval(marketTimers.get(button));
+    restoreMarketButton(button);
+  });
+
+  button.addEventListener('focus', () => glitchMarketButton(button));
+  button.addEventListener('blur', () => restoreMarketButton(button));
+});
+
 setActive(activeId);
