@@ -82,8 +82,8 @@ button { cursor: pointer; }
   gap: 10px;
   width: max-content;
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: .03em;
+  font-weight: 400;
+  letter-spacing: .045em;
   transform-origin: left center;
   transition: transform .28s cubic-bezier(.2, .9, .2, 1), text-shadow .28s ease, filter .28s ease;
 }
@@ -93,9 +93,9 @@ button { cursor: pointer; }
 .nav-link::after {
   content: '';
   position: absolute;
-  top: 2px;
+  top: 0;
   right: 0;
-  width: 12px;
+  width: 16px;
   aspect-ratio: 1;
   background: #fff;
   clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 61%, 50% 100%, 40% 61%, 0 50%, 40% 39%);
@@ -155,7 +155,7 @@ button { cursor: pointer; }
   justify-self: center;
   width: min(100%, 154px);
   display: grid;
-  gap: clamp(18px, 2.6vh, 26px);
+  gap: clamp(10px, 1.6vh, 14px);
 }
 
 .rail-logo {
@@ -178,7 +178,7 @@ button { cursor: pointer; }
 }
 
 .market-links a {
-  min-height: clamp(40px, 5.8vh, 48px);
+  min-height: clamp(48px, 6.8vh, 58px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -188,6 +188,7 @@ button { cursor: pointer; }
   background: transparent;
   color: #fff;
   font-size: 12px;
+  line-height: 1.05;
   font-weight: 700;
   letter-spacing: .02em;
   text-transform: uppercase;
@@ -411,7 +412,7 @@ h1 {
   }
 
   .main-nav { width: min(100%, 138px); transform: translateY(-10vh); }
-  .rail-bottom { width: min(100%, 138px); }
+  .rail-bottom { width: min(100%, 138px); gap: 10px; }
   .rail-logo { font-size: clamp(38px, 4vw, 52px); }
 
   .nav-link span { font-size: 13px; }
