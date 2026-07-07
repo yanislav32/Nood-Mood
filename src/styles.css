@@ -58,9 +58,11 @@ button { cursor: pointer; }
 
 .main-nav {
   align-self: center;
+  justify-self: center;
+  width: min(100%, 150px);
   display: grid;
   gap: clamp(18px, 3.1vh, 28px);
-  transform: translateY(-2vh);
+  transform: translateY(-7vh);
 }
 
 .nav-link {
@@ -75,12 +77,44 @@ button { cursor: pointer; }
 }
 
 .nav-link span {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  width: max-content;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: .03em;
+  transform-origin: left center;
+  transition: transform .22s ease, text-shadow .22s ease, filter .22s ease;
+}
+
+.nav-link span::before {
+  content: '';
+  width: 12px;
+  aspect-ratio: 1;
+  margin-left: -20px;
+  background: #fff;
+  clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 61%, 50% 100%, 40% 61%, 0 50%, 40% 39%);
+  opacity: 0;
+  transform: scale(.62) rotate(-18deg);
+  transition: opacity .2s ease, transform .22s ease;
+}
+
+.nav-link:hover span,
+.nav-link.active span {
+  transform: scale(1.055);
+  text-shadow:
+    -1px 0 #00f5ff,
+    1px 0 #ff35d1,
+    0 0 10px rgba(255, 255, 255, .75);
+  animation: nav-glitch .45s steps(2, end) infinite;
+}
+
+.nav-link:hover span::before,
+.nav-link.active span::before {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 
 .nav-link small {
@@ -89,10 +123,13 @@ button { cursor: pointer; }
   font-weight: 400;
 }
 
-.nav-link.active span::after {
-  content: '•';
-  font-size: 18px;
-  line-height: 1;
+
+
+@keyframes nav-glitch {
+  0%, 100% { filter: none; }
+  22% { filter: hue-rotate(18deg); transform: translateX(.5px) scale(1.055); }
+  45% { filter: hue-rotate(-20deg); transform: translateX(-.5px) scale(1.06); }
+  68% { filter: saturate(1.45); }
 }
 
 .rail-bottom {
@@ -101,21 +138,28 @@ button { cursor: pointer; }
 }
 
 .rail-logo {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+  width: 100%;
   color: #fff;
   font-family: var(--font-brand);
   font-size: clamp(42px, 4.2vw, 62px);
   font-weight: 700;
   line-height: .86;
-  letter-spacing: -.09em;
+  letter-spacing: -.045em;
   text-transform: uppercase;
 }
+
+.rail-logo span:first-child { justify-self: start; }
+.rail-logo span:not(:first-child):not(:last-child) { justify-self: center; }
+.rail-logo span:last-child { justify-self: end; }
 
 .market-links {
   display: grid;
   gap: 10px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, .42);
+  padding-top: 0;
+  border-top: 0;
 }
 
 .market-links a {
@@ -351,12 +395,12 @@ h1 {
     padding: 22px 14px 18px;
   }
 
-  .main-nav { transform: translateY(-1vh); }
+  .main-nav { width: min(100%, 134px); transform: translateY(-5vh); }
   .rail-logo { font-size: clamp(38px, 4vw, 52px); }
 
   .nav-link span { font-size: 13px; }
   .nav-link small { font-size: 12px; }
-  .market-links { gap: 8px; padding-top: 16px; }
+  .market-links { gap: 8px; padding-top: 0; }
   .market-links a { padding: 0 10px; font-size: 11px; }
 
   .stage {
@@ -430,15 +474,19 @@ h1 {
   .main-nav {
     display: flex;
     gap: 16px;
+    width: 100%;
     overflow-x: auto;
     align-self: auto;
+    justify-self: stretch;
+    transform: none;
   }
 
   .nav-link { min-width: max-content; }
   .nav-link small { display: none; }
+
   .rail-bottom { gap: 10px; }
   .rail-logo { display: none; }
-  .market-links { display: flex; overflow-x: auto; padding-top: 12px; }
+  .market-links { display: flex; overflow-x: auto; padding-top: 0; }
   .market-links a { min-width: max-content; }
 
   .stage { display: block; overflow: visible; }
