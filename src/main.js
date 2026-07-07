@@ -108,9 +108,7 @@ function glitchMarketButton(button) {
   const icon = button.querySelector('i');
   if (!span || !icon) return;
 
-  const topLength = span.dataset.top.length;
-  const bottomLength = span.dataset.bottom.length;
-  span.innerHTML = `${randomGlyphLine(topLength)}<br>${randomGlyphLine(bottomLength)}`;
+  span.innerHTML = `${randomizeWordParts(span.dataset.top)}<br>${randomizeWordParts(span.dataset.bottom)}`;
   icon.textContent = glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)];
 }
 

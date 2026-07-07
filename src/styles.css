@@ -233,7 +233,7 @@ button { cursor: pointer; }
 
 .market-links a.is-paused::before {
   opacity: 1;
-  background-position: 0 0, 0 0, 0 0;
+  filter: none;
   animation: none;
 }
 
@@ -248,10 +248,9 @@ button { cursor: pointer; }
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, #fff 0 50%, #050505 50% 100%),
+    linear-gradient(#fff, #fff),
     repeating-linear-gradient(90deg, transparent 0 5px, rgba(0,245,255,.25) 5px 6px),
     repeating-linear-gradient(0deg, transparent 0 6px, rgba(255,53,209,.22) 6px 7px);
-  background-size: 200% 100%, 10px 100%, 100% 9px;
   opacity: 0;
   transform: scaleX(1);
   transform-origin: left center;
@@ -283,7 +282,7 @@ button { cursor: pointer; }
     -1px 0 rgba(0, 245, 255, .82),
     1px 0 rgba(255, 53, 209, .76),
     0 0 10px rgba(255,255,255,.5);
-  animation: button-cyber-jitter .55s steps(2, end) infinite;
+  animation: button-block-glitch .48s steps(2, end) infinite;
 }
 
 .market-links a:hover.is-paused {
@@ -292,7 +291,7 @@ button { cursor: pointer; }
 
 .market-links a:hover.is-paused::before {
   opacity: 1;
-  background-position: 0 0, 0 0, 0 0;
+  filter: none;
   animation: none;
 }
 
@@ -327,15 +326,23 @@ button { cursor: pointer; }
 }
 
 @keyframes button-binary-fill {
-  0% { background-position: 0 0, 0 0, 0 0; filter: invert(0); }
-  8% { background-position: 100% 0, 2px 0, 0 1px; filter: invert(1); }
-  17% { background-position: 0 0, -3px 0, 0 -1px; filter: invert(0); }
-  25% { background-position: 100% 0, 5px 0, 0 2px; filter: invert(1); }
-  34% { background-position: 0 0, -1px 0, 0 -2px; filter: invert(0); }
-  42% { background-position: 100% 0, 3px 0, 0 3px; filter: invert(1); }
-  51% { background-position: 0 0, -4px 0, 0 0; filter: invert(0); }
-  60% { background-position: 100% 0, 1px 0, 0 -3px; filter: invert(1); }
-  72%, 100% { background-position: 0 0, 0 0, 0 0; filter: invert(0); }
+  0%, 100% { filter: invert(0) contrast(1.05); }
+  7% { filter: invert(1) contrast(1.45); }
+  14% { filter: invert(0) contrast(1.2); }
+  22% { filter: invert(1) contrast(1.6); }
+  31% { filter: invert(0) contrast(1.1); }
+  39% { filter: invert(1) contrast(1.55); }
+  48% { filter: invert(0) contrast(1.22); }
+  58% { filter: invert(1) contrast(1.5); }
+  69%, 100% { filter: invert(0) contrast(1.05); }
+}
+
+@keyframes button-block-glitch {
+  0%, 100% { color: var(--orange); transform: translateX(0); filter: none; }
+  18% { color: #fff; transform: translateX(-1px); filter: contrast(1.35); }
+  36% { color: #050505; transform: translateX(1px); filter: invert(1) contrast(1.18); }
+  54% { color: var(--orange); transform: translateX(0); filter: contrast(1.45); }
+  72% { color: #fff; transform: translateX(-1px); filter: none; }
 }
 
 @keyframes glitch-noise {
