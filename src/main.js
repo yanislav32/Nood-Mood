@@ -110,20 +110,54 @@ function glitchMarketButton(button) {
   icon.textContent = glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)];
 }
 
-document.querySelectorAll('[data-market-button]').forEach((button) => {
-  button.addEventListener('mouseenter', () => {
-    window.clearInterval(marketTimers.get(button));
+function clearMarketTimers(button) {
+  const timers = marketTimers.get(button);
+  if (!timers) return;
+
+  window.clearInterval(timers.interval);
+  window.clearTimeout(timers.timeout);
+}
+
+function startMarketGlitch(button) {
+  clearMarketTimers(button);
+  button.dataset.glitching = 'true';
+
+  const runBurst = () => {
+    if (button.dataset.glitching !== 'true') return;
+
+    button.classList.add('is-glitching');
+    button.classList.remove('is-paused');
     glitchMarketButton(button);
-    marketTimers.set(button, window.setInterval(() => glitchMarketButton(button), 38));
-  });
 
-  button.addEventListener('mouseleave', () => {
-    window.clearInterval(marketTimers.get(button));
-    restoreMarketButton(button);
-  });
+    const interval = window.setInterval(() => glitchMarketButton(button), 38);
+    const timeout = window.setTimeout(() => {
+      window.clearInterval(interval);
+      restoreMarketButton(button);
+      button.classList.remove('is-glitching');
+      button.classList.add('is-paused');
 
-  button.addEventListener('focus', () => glitchMarketButton(button));
-  button.addEventListener('blur', () => restoreMarketButton(button));
+      const pauseTimeout = window.setTimeout(runBurst, 320);
+      marketTimers.set(button, { interval: 0, timeout: pauseTimeout });
+    }, 420);
+
+    marketTimers.set(button, { interval, timeout });
+  };
+
+  runBurst();
+}
+
+function stopMarketGlitch(button) {
+  button.dataset.glitching = 'false';
+  clearMarketTimers(button);
+  button.classList.remove('is-glitching', 'is-paused');
+  restoreMarketButton(button);
+}
+
+document.querySelectorAll('[data-market-button]').forEach((button) => {
+  button.addEventListener('mouseenter', () => startMarketGlitch(button));
+  button.addEventListener('mouseleave', () => stopMarketGlitch(button));
+  button.addEventListener('focus', () => startMarketGlitch(button));
+  button.addEventListener('blur', () => stopMarketGlitch(button));
 });
 
 setActive(activeId);

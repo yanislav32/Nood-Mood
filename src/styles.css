@@ -217,6 +217,21 @@ button { cursor: pointer; }
   transition: color .2s ease, border-color .2s ease, text-shadow .2s ease, box-shadow .2s ease;
 }
 
+.market-links a.is-paused {
+  color: var(--orange);
+}
+
+.market-links a.is-paused::before {
+  opacity: 1;
+  background-position: 0 0, 0 0, 0 0;
+  animation: none;
+}
+
+.market-links a.is-paused::after {
+  opacity: 0;
+  animation: none;
+}
+
 .market-links a::before {
   content: '';
   position: absolute;
@@ -261,12 +276,29 @@ button { cursor: pointer; }
   animation: button-cyber-jitter .34s steps(2, end) infinite;
 }
 
-.market-links a:hover::before {
-  opacity: 1;
-  animation: button-binary-fill .34s steps(12, end) infinite;
+.market-links a:hover.is-paused {
+  animation: none;
 }
 
-.market-links a:hover::after {
+.market-links a:hover.is-paused::before {
+  opacity: 1;
+  background-position: 0 0, 0 0, 0 0;
+  animation: none;
+}
+
+.market-links a:hover.is-paused::after {
+  opacity: 0;
+  animation: none;
+}
+
+.market-links a.is-glitching::before,
+.market-links a:hover:not(.is-paused)::before {
+  opacity: 1;
+  animation: button-binary-fill .74s steps(12, end) infinite;
+}
+
+.market-links a.is-glitching::after,
+.market-links a:hover:not(.is-paused)::after {
   opacity: .86;
   animation: glitch-noise .18s steps(4, end) infinite;
 }
@@ -285,7 +317,7 @@ button { cursor: pointer; }
 }
 
 @keyframes button-binary-fill {
-  0%, 100% { background-position: 0 0, 0 0, 0 0; filter: invert(0); }
+  0% { background-position: 0 0, 0 0, 0 0; filter: invert(0); }
   8% { background-position: 100% 0, 2px 0, 0 1px; filter: invert(1); }
   17% { background-position: 0 0, -3px 0, 0 -1px; filter: invert(0); }
   25% { background-position: 100% 0, 5px 0, 0 2px; filter: invert(1); }
@@ -293,7 +325,7 @@ button { cursor: pointer; }
   42% { background-position: 100% 0, 3px 0, 0 3px; filter: invert(1); }
   51% { background-position: 0 0, -4px 0, 0 0; filter: invert(0); }
   60% { background-position: 100% 0, 1px 0, 0 -3px; filter: invert(1); }
-  72% { background-position: 0 0, 6px 0, 0 1px; filter: invert(0); }
+  72%, 100% { background-position: 0 0, 0 0, 0 0; filter: invert(0); }
 }
 
 @keyframes glitch-noise {
