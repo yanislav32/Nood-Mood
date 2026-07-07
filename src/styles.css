@@ -25,7 +25,6 @@
   --thin: 1px;
   --gap: clamp(8px, 1.05vw, 14px);
   --rail-pad-top: clamp(24px, 4.5vh, 42px);
-  --content-top-offset: clamp(92px, 15vh, 146px);
   font-family: var(--font-body);
   color: var(--black);
   background: var(--white);
@@ -59,13 +58,12 @@ button { cursor: pointer; }
 }
 
 .main-nav {
-  align-self: start;
+  align-self: center;
   justify-self: center;
   width: min(100%, 154px);
   display: grid;
-  gap: clamp(18px, 3.1vh, 28px);
-  margin-top: calc(var(--content-top-offset) - var(--rail-pad-top));
-  transform: none;
+  gap: clamp(20px, 3.4vh, 31px);
+  transform: translateY(-2vh);
 }
 
 .nav-link {
@@ -431,9 +429,8 @@ button { cursor: pointer; }
 .hero-copy {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
-  padding-top: calc(var(--content-top-offset) - var(--gap));
   padding-left: clamp(28px, 2.5vw, 42px);
   opacity: 0;
   transform: translateY(8px);
@@ -670,7 +667,6 @@ h1 {
   :root {
     --gap: 10px;
     --rail-pad-top: 22px;
-    --content-top-offset: clamp(80px, 13vh, 118px);
   }
 
   .site-shell {
@@ -681,7 +677,7 @@ h1 {
     padding: 22px 14px 18px;
   }
 
-  .main-nav { width: min(100%, 138px); }
+  .main-nav { width: min(100%, 138px); gap: clamp(20px, 3.4vh, 30px); transform: translateY(-2.5vh); }
   .rail-bottom { width: min(100%, 138px); gap: 10px; }
   .rail-logo { font-size: clamp(38px, 4vw, 52px); }
 
@@ -705,7 +701,6 @@ h1 {
   }
 
   .hero-copy {
-    padding-top: calc(var(--content-top-offset) - var(--gap));
     padding-left: 28px;
   }
 
