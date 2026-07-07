@@ -383,7 +383,7 @@ button { cursor: pointer; }
   min-width: 0;
   min-height: 0;
   display: grid;
-  grid-template-rows: minmax(0, 52fr) clamp(34px, 5vh, 42px) minmax(0, 24fr) clamp(72px, 10.5vh, 92px) clamp(28px, 4.3vh, 34px);
+  grid-template-rows: minmax(0, 50.8fr) clamp(34px, 5vh, 42px) minmax(0, 24fr) clamp(72px, 10.5vh, 92px) clamp(28px, 4.3vh, 34px);
   gap: 0;
   overflow: hidden;
   background: var(--white);
@@ -692,7 +692,7 @@ h1 {
   .market-links a { padding: 0 10px; font-size: 11px; }
 
   .stage {
-    grid-template-rows: minmax(0, 50fr) 34px minmax(0, 24fr) 72px 28px;
+    grid-template-rows: minmax(0, 49fr) 34px minmax(0, 24fr) 72px 28px;
   }
 
   .hero {
