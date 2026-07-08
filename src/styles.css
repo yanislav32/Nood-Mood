@@ -385,7 +385,7 @@ button { cursor: pointer; }
   min-width: 0;
   min-height: 0;
   display: grid;
-  grid-template-rows: minmax(0, 43.6fr) clamp(34px, 5vh, 42px) minmax(0, 24fr) clamp(72px, 10.5vh, 92px) var(--legal-footer-height);
+  grid-template-rows: minmax(0, 44.5fr) clamp(34px, 5vh, 42px) minmax(0, 24fr) clamp(72px, 10.5vh, 92px) var(--legal-footer-height);
   gap: 0;
   overflow: hidden;
   background: var(--white);
@@ -650,18 +650,30 @@ h1 {
 .sub-footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: clamp(14px, 2vw, 28px);
-  padding: 0 var(--gap);
+  padding: 0 var(--hero-copy-inset);
   border-width: 0;
   background: #050505;
   color: rgba(255, 255, 255, .62);
   font-family: var(--font-brand);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: .045em;
-  text-transform: uppercase;
+  letter-spacing: .01em;
+  text-transform: none;
   white-space: nowrap;
+}
+
+.legal-copy {
+  flex: 0 0 auto;
+}
+
+.legal-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(12px, 1.8vw, 26px);
+  min-width: 0;
 }
 
 .sub-footer a {
@@ -699,7 +711,7 @@ h1 {
   .market-links a { padding: 0 10px; font-size: 11px; }
 
   .stage {
-    grid-template-rows: minmax(0, 42fr) 34px minmax(0, 24fr) 72px var(--legal-footer-height);
+    grid-template-rows: minmax(0, 42.8fr) 34px minmax(0, 24fr) 72px var(--legal-footer-height);
   }
 
   .hero {
@@ -738,7 +750,8 @@ h1 {
   .quick-card p { font-size: 12px; }
   .footer { grid-template-columns: 32px minmax(120px, .38fr) minmax(210px, 340px) minmax(250px, .72fr) 32px; }
   .social-links { gap: 8px; }
-  .sub-footer { font-size: 13px; gap: 14px; }
+  .sub-footer { font-size: 11px; gap: 14px; }
+  .legal-links { gap: 12px; }
 }
 
 @media (max-width: 1080px) and (min-width: 901px) {
@@ -807,5 +820,6 @@ h1 {
   .ticker { min-height: 44px; }
   .quick-card { min-height: 210px; }
   .footer { min-height: 260px; }
-  .sub-footer { min-height: 38px; }
+  .sub-footer { min-height: 38px; flex-wrap: wrap; justify-content: flex-start; white-space: normal; padding: 10px 12px; }
+  .legal-links { flex-wrap: wrap; justify-content: flex-start; }
 }
