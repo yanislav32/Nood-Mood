@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NØØD — wireframe</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main class="site-shell">
+      <aside class="side-rail" aria-label="Меню сайта">
+        <nav class="main-nav" aria-label="Основное меню"></nav>
+
+        <div class="rail-bottom" aria-label="Покупка и логотип">
+          <a class="rail-logo" href="#home" aria-label="NØØD home">NØØD</a>
+          <div class="market-links" aria-label="Маркетплейсы">
+            <a href="#ozon" data-market-button><span data-top="Купить" data-bottom="на OZON">Купить<br>на OZON</span><i data-glyph="オ">オ</i></a>
+            <a href="#wildberries" data-market-button><span data-top="Купить" data-bottom="на WB">Купить<br>на WB</span><i data-glyph="ヌ">ヌ</i></a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="stage">
+        <header class="mobile-header">
+          <button class="mobile-menu-label" type="button">Меню</button>
+        </header>
+
+        <section class="hero wire-zone" aria-live="polite">
+          <div class="hero-copy wire-zone inner-zone">
+            <p class="zone-caption" data-field="eyebrow"></p>
+            <h1 data-field="headline">Инстант-лапша нового поколения</h1>
+            <p data-field="text">Полноценный горячий обед на каждый день в знакомом, но переосмысленном формате быстрого приготовления. Яркий вкус, натуральный состав и визуальный код, который превращает привычный стакан в предмет желания.</p>
+            <a class="primary-cta" href="#try">Попробовать NØØD <span>→</span></a>
+          </div>
+
+          <div class="logo-zone wire-zone inner-zone">
+            <span class="zone-caption">Neon / logo zone</span>
+          </div>
+
+          <div class="product-zone wire-zone inner-zone">
+            <span class="zone-caption">Product image zone</span>
+          </div>
+        </section>
+
+        <div class="ticker wire-zone" aria-label="Информационная полоса">
+          <span class="zone-caption">Ticker / benefits strip</span>
+        </div>
+
+        <section class="quick-cards" aria-label="Карточки разделов">
+          <article class="quick-card wire-zone" data-open="product">
+            <span class="card-number">01</span>
+            <h2>Продукт</h2>
+            <p>Card image / product content zone</p>
+            <button type="button" aria-label="Открыть продукт">→</button>
+          </article>
+          <article class="quick-card wire-zone" data-open="philosophy">
+            <span class="card-number">02</span>
+            <h2>Философия</h2>
+            <p>Card image / philosophy content zone</p>
+            <button type="button" aria-label="Открыть философию">→</button>
+          </article>
+          <article class="quick-card wire-zone" data-open="world">
+            <span class="card-number">03</span>
+            <h2>Мир NØØD</h2>
+            <p>Card image / world content zone</p>
+            <button type="button" aria-label="Открыть мир NØØD">→</button>
+          </article>
+        </section>
+
+        <footer class="footer" aria-label="Подвал сайта">
+          <span class="footer-mark" aria-hidden="true">✦</span>
+          <div class="newsletter-block">
+            <strong>Будь в курсе</strong>
+            <span>ニュースレター</span>
+          </div>
+          <form class="newsletter-form" aria-label="Подписка на новости">
+            <input type="email" placeholder="Ваш e-mail" aria-label="Ваш e-mail" />
+            <button type="button" aria-label="Подписаться">→</button>
+          </form>
+          <div class="social-block" aria-label="Социальные сети">
+            <div>
+              <strong>Мы в соцсетях</strong>
+              <span>ソーシャル</span>
+            </div>
+            <nav class="social-links" aria-label="Ссылки на соцсети">
+              <a href="#instagram" aria-label="Instagram">IG</a>
+              <a href="#vk" aria-label="VK">VK</a>
+              <a href="#telegram" aria-label="Telegram">TG</a>
+            </nav>
+          </div>
+          <span class="footer-mark" aria-hidden="true">✦</span>
+        </footer>
+
+        <div class="sub-footer" aria-label="Юридическая информация">
+          <span class="legal-copy"><span>© 2026 NØØD</span><span>Все права защищены</span></span>
+          <nav class="legal-links" aria-label="Юридические ссылки">
+            <a href="#privacy">Политика конфиденциальности</a>
+            <a href="#personal-data">Согласие на обработку персональных данных</a>
+            <a href="#contacts">Контакты</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
