@@ -507,8 +507,6 @@ h1 {
   min-width: max-content;
   display: flex;
   align-items: center;
-  gap: clamp(12px, 1.4vw, 22px);
-  padding-inline: clamp(14px, 1.8vw, 28px);
   font-family: var(--font-brand);
   font-size: 13px;
   font-weight: 400;
@@ -518,29 +516,22 @@ h1 {
   animation: ticker-scroll 34s linear infinite;
 }
 
+.ticker-sequence {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 22px);
+  padding-right: clamp(12px, 1.4vw, 22px);
+}
+
 .ticker-star {
   color: var(--orange);
   font-size: 16px;
   line-height: 1;
 }
 
-.ticker-word.is-glitching {
-  text-shadow:
-    -1px 0 rgba(0, 245, 255, .8),
-    1px 0 rgba(255, 53, 209, .75),
-    0 0 10px rgba(255,255,255,.48);
-  animation: ticker-word-glitch .22s steps(2, end) infinite;
-}
-
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-
-@keyframes ticker-word-glitch {
-  0%, 100% { filter: none; transform: translateX(0); }
-  45% { filter: contrast(1.6); transform: translateX(-1px); }
-  70% { filter: invert(1) contrast(1.2); transform: translateX(1px); }
 }
 
 .quick-cards {
