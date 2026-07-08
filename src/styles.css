@@ -26,7 +26,7 @@
   --gap: clamp(8px, 1.05vw, 14px);
   --rail-pad-top: clamp(24px, 4.5vh, 42px);
   --hero-copy-inset: clamp(28px, 2.5vw, 42px);
-  --legal-footer-height: clamp(31px, 2.75vw, 46px);
+  --legal-footer-height: clamp(34px, 3.03vw, 51px);
   font-family: var(--font-body);
   color: var(--black);
   background: var(--white);
@@ -656,8 +656,10 @@ h1 {
   border-width: 0;
   background: #050505;
   color: rgba(255, 255, 255, .62);
-  font-size: 12px;
-  letter-spacing: .04em;
+  font-family: var(--font-brand);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .045em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -676,7 +678,7 @@ h1 {
     --gap: 10px;
     --rail-pad-top: 22px;
     --hero-copy-inset: 28px;
-    --legal-footer-height: 31px;
+    --legal-footer-height: 34px;
   }
 
   .site-shell {
@@ -736,7 +738,7 @@ h1 {
   .quick-card p { font-size: 12px; }
   .footer { grid-template-columns: 32px minmax(120px, .38fr) minmax(210px, 340px) minmax(250px, .72fr) 32px; }
   .social-links { gap: 8px; }
-  .sub-footer { font-size: 10px; gap: 14px; }
+  .sub-footer { font-size: 13px; gap: 14px; }
 }
 
 @media (max-width: 1080px) and (min-width: 901px) {
