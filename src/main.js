@@ -232,6 +232,32 @@ nav.addEventListener('mouseout', (event) => {
   stopNavGlitch(button);
 });
 
+
+function startTickerGlitch() {
+  const tickerWords = Array.from(document.querySelectorAll('.ticker-word'));
+  if (!tickerWords.length) return;
+
+  window.setInterval(() => {
+    const word = tickerWords[Math.floor(Math.random() * tickerWords.length)];
+    const original = word.textContent;
+    let ticks = 0;
+
+    word.classList.add('is-glitching');
+    const glitchTimer = window.setInterval(() => {
+      word.textContent = randomizeWordParts(original);
+      ticks += 1;
+
+      if (ticks >= 7) {
+        window.clearInterval(glitchTimer);
+        word.textContent = original;
+        word.classList.remove('is-glitching');
+      }
+    }, 48);
+  }, 9000);
+}
+
+startTickerGlitch();
+
 document.querySelectorAll('[data-market-button]').forEach((button) => {
   button.addEventListener('mouseenter', () => startMarketGlitch(button));
   button.addEventListener('mouseleave', () => stopMarketGlitch(button));
