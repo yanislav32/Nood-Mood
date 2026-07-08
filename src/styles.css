@@ -25,6 +25,7 @@
   --thin: 1px;
   --gap: clamp(8px, 1.05vw, 14px);
   --rail-pad-top: clamp(24px, 4.5vh, 42px);
+  --hero-copy-inset: clamp(28px, 2.5vw, 42px);
   font-family: var(--font-body);
   color: var(--black);
   background: var(--white);
@@ -383,7 +384,7 @@ button { cursor: pointer; }
   min-width: 0;
   min-height: 0;
   display: grid;
-  grid-template-rows: minmax(0, 43.6fr) clamp(34px, 5vh, 42px) minmax(0, 24fr) clamp(72px, 10.5vh, 92px) clamp(28px, 4.3vh, 34px);
+  grid-template-rows: minmax(0, 43.6fr) clamp(34px, 5vh, 42px) minmax(0, 24fr) clamp(72px, 10.5vh, 92px) var(--hero-copy-inset);
   gap: 0;
   overflow: hidden;
   background: var(--white);
@@ -436,7 +437,7 @@ button { cursor: pointer; }
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: clamp(28px, 2.5vw, 42px);
+  padding-left: var(--hero-copy-inset);
   opacity: 0;
   transform: translateY(8px);
   transition: opacity .2s ease, transform .2s ease;
@@ -652,7 +653,8 @@ h1 {
   gap: clamp(14px, 2vw, 28px);
   padding: 0 var(--gap);
   border-width: 0;
-  color: var(--muted);
+  background: #050505;
+  color: rgba(255, 255, 255, .62);
   font-size: 12px;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -672,6 +674,7 @@ h1 {
   :root {
     --gap: 10px;
     --rail-pad-top: 22px;
+    --hero-copy-inset: 28px;
   }
 
   .site-shell {
@@ -692,7 +695,7 @@ h1 {
   .market-links a { padding: 0 10px; font-size: 11px; }
 
   .stage {
-    grid-template-rows: minmax(0, 42fr) 34px minmax(0, 24fr) 72px 28px;
+    grid-template-rows: minmax(0, 42fr) 34px minmax(0, 24fr) 72px var(--hero-copy-inset);
   }
 
   .hero {
@@ -706,7 +709,7 @@ h1 {
   }
 
   .hero-copy {
-    padding-left: 28px;
+    padding-left: var(--hero-copy-inset);
   }
 
   h1 {
