@@ -568,8 +568,15 @@ h1 {
   text-transform: uppercase;
 }
 
+.card-kana {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1;
+}
+
 .quick-card p {
-  max-width: 280px;
+  max-width: 340px;
   margin: clamp(10px, 1.2vw, 16px) 0 0;
   color: var(--muted);
   font-size: 14px;
