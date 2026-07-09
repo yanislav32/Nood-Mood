@@ -538,9 +538,9 @@ h1 {
   min-height: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap);
-  padding: var(--gap);
-  border-bottom: var(--thin) solid var(--line);
+  gap: 0;
+  padding: 0;
+  border: 0;
 }
 
 .quick-card {
@@ -549,7 +549,14 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(14px, 1.7vw, 20px);
+  align-items: flex-start;
+  padding: clamp(14px, 1.7vw, 20px) var(--hero-copy-inset);
+  border: 0;
+  text-align: left;
+}
+
+.quick-card.wire-zone {
+  border: 0;
 }
 
 .quick-card h2 {
@@ -571,13 +578,13 @@ h1 {
 
 .quick-card button {
   position: absolute;
-  right: 18px;
-  bottom: 18px;
+  right: var(--hero-copy-inset);
+  bottom: clamp(14px, 1.7vw, 20px);
   width: clamp(36px, 4.8vh, 44px);
   height: clamp(36px, 4.8vh, 44px);
   display: grid;
   place-items: center;
-  border: var(--thin) solid var(--line);
+  border: 0;
   background: transparent;
   font-size: 22px;
 }
