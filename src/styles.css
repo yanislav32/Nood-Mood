@@ -26,6 +26,7 @@
   --gap: clamp(8px, 1.05vw, 14px);
   --rail-pad-top: clamp(24px, 4.5vh, 42px);
   --hero-copy-inset: clamp(28px, 2.5vw, 42px);
+  --content-left: calc(var(--gap) + var(--hero-copy-inset));
   --legal-footer-height: clamp(44px, 3.93vw, 67px);
   font-family: var(--font-body);
   color: var(--black);
@@ -550,7 +551,7 @@ h1 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: clamp(18px, 2.1vw, 30px) var(--hero-copy-inset) clamp(16px, 2vw, 26px);
+  padding: clamp(18px, 2.1vw, 30px) var(--content-left) clamp(16px, 2vw, 26px);
   border: 0;
   text-align: left;
 }
@@ -585,7 +586,7 @@ h1 {
 
 .quick-card button {
   position: absolute;
-  left: var(--hero-copy-inset);
+  left: var(--content-left);
   bottom: clamp(16px, 2vw, 26px);
   width: clamp(36px, 4.8vh, 44px);
   height: clamp(36px, 4.8vh, 44px);
@@ -700,7 +701,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: clamp(14px, 2vw, 28px);
-  padding: 0 var(--hero-copy-inset);
+  padding: 0 var(--content-left);
   border-width: 0;
   background: #050505;
   color: rgba(255, 255, 255, .62);
