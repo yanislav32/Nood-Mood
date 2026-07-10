@@ -417,7 +417,10 @@ button { cursor: pointer; }
   gap: var(--gap);
   padding: var(--gap);
   border-width: 0;
-  background: #050505;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.48) 38%, rgba(0,0,0,.18) 100%),
+    url('/src/assets/images/hero-main.webp') center / cover no-repeat,
+    #050505;
   color: var(--white);
 }
 
@@ -547,6 +550,8 @@ h1 {
 
 .quick-card {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -555,7 +560,22 @@ h1 {
   padding: clamp(18px, 2.1vw, 30px) var(--content-left) clamp(16px, 2vw, 26px);
   border: 0;
   text-align: left;
+  background-position: center;
+  background-size: cover;
+  color: var(--white);
 }
+
+.quick-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.38) 48%, rgba(0,0,0,.12) 100%);
+}
+
+.quick-card[data-open="product"] { background-image: url('/src/assets/images/card-product.webp'); }
+.quick-card[data-open="philosophy"] { background-image: url('/src/assets/images/card-philosophy.webp'); }
+.quick-card[data-open="world"] { background-image: url('/src/assets/images/card-world.webp'); }
 
 .quick-card.wire-zone {
   border: 0;
@@ -572,7 +592,7 @@ h1 {
 
 .card-kana {
   margin-top: 6px;
-  color: var(--muted);
+  color: rgba(255,255,255,.58);
   font-size: 13px;
   line-height: 1;
 }
@@ -580,7 +600,7 @@ h1 {
 .quick-card p {
   max-width: 340px;
   margin: clamp(10px, 1.2vw, 16px) 0 0;
-  color: var(--muted);
+  color: rgba(255,255,255,.72);
   font-size: 14px;
   line-height: 1.35;
 }
